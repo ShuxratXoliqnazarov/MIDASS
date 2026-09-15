@@ -3,7 +3,7 @@
 /*
  * Дизайн-токены из Figma (MIDAS).
  * Используй их как обычные классы Tailwind:
- *   bg-primary, text-accent, bg-dark, text-muted, font-montserrat, text-heading ...
+ *   bg-primary, text-accent, bg-dark, text-muted, font-montserrat, text-display, shadow-button ...
  * НЕ пиши хардкод-цвета (#fbd13e) в компонентах — добавь токен сюда.
  */
 @theme {
@@ -14,24 +14,97 @@
   --color-primary: #fbd13e; /* жёлтый: кнопки, корзина, активные элементы */
   --color-primary-hover: #dbb325;
   --color-accent: #b70000; /* красный: акции, плашки */
-  --color-navy: #09234e; /* тёмно-синий: градиент фона, hover карточек меню */
-  --color-muted: #9ea2aa; /* серый текст, зачёркнутые цены */
-  --color-line: #c4c4c4; /* бордеры, разделители */
+  --color-navy: #09234e; /* тёмно-синий: hover карточек меню */
+  --color-muted: #9ea2aa; /* серый текст */
+  --color-line: #c4c4c4; /* бордеры */
+  --color-line-dark: #3d3d3d; /* разделители в мобильном меню */
+  --color-placeholder: #999999; /* плейсхолдеры инпутов */
   --color-dark: #0f0f11; /* основной фон сайта */
   --color-dark-soft: #1c1b1b; /* фон блоков */
 
-  /* ---------- Размеры текста (из макета, px → rem) ---------- */
-  --text-display: 5rem; /* 80px — «Популярные блюда», «Меню» */
-  --text-heading: 3.125rem; /* 50px — заголовки страниц */
-  --text-subheading: 1.5625rem; /* 25px */
-  --text-price: 1.4375rem; /* 23px, weight 800 — цены */
-  --text-body: 1.25rem; /* 20px — названия блюд */
-  --text-caption: 0.8125rem; /* 13px — описания, навигация */
-  --text-tiny: 0.75rem; /* 12px */
+  /* ---------- Размеры текста (размер / межстрочный) ---------- */
+  --text-display: 5rem; /* 80/90 — «Популярные блюда», «Меню», заголовки страниц */
+  --text-display--line-height: 1.125;
+  --text-title: 2.5rem; /* 40/45 — те же заголовки на телефоне */
+  --text-title--line-height: 1.125;
+  --text-subheading: 1.5625rem; /* 25/30 */
+  --text-subheading--line-height: 1.2;
+  --text-price: 1.4375rem; /* 23/28, weight 800 — цены */
+  --text-price--line-height: 1.2174;
+  --text-body: 1.25rem; /* 20/24 — названия блюд */
+  --text-body--line-height: 1.2;
+  --text-caption: 0.8125rem; /* 13/18 — описания */
+  --text-caption--line-height: 1.385;
+  --text-tiny: 0.75rem; /* 12/15 — навигация, футер */
+  --text-tiny--line-height: 1.25;
+
+  /* ---------- Тени ---------- */
+  --shadow-button: 0 10px 31px rgb(15 15 17 / 0.2);
 
   /* ---------- Брейкпоинты (макеты: 360 / 768 / 1024 / 1600) ---------- */
-  /* sm: 640px, md: 768px, lg: 1024px, xl: 1280px — стандартные Tailwind */
+  /* md: 768px (Tablet_768), lg: 1024px (Tablet_1024), xl: 1280px+ (Desktop) */
   --breakpoint-3xl: 100rem; /* 1600px — ширина desktop-макета */
+}
+
+/* Отступ контента от края экрана и высота хедера — меняются по брейкпоинтам */
+:root {
+  --page-x: 15px;
+  --header-h: 75px;
+}
+
+@media (width >= 48rem) {
+  :root {
+    --page-x: 20px;
+    --header-h: 126px;
+  }
+}
+
+@media (width >= 80rem) {
+  :root {
+    --page-x: 50px;
+  }
+}
+
+/* Горизонтальный отступ как у Container */
+@utility px-page {
+  padding-inline: var(--page-x);
+}
+
+/* Левый отступ «до линии контента» для блоков, которые уходят за правый край (слайдеры) */
+@utility pl-gutter {
+  padding-left: max(var(--page-x), calc((100vw - 1600px) / 2 + var(--page-x)));
+}
+
+@utility scroll-pl-gutter {
+  scroll-padding-left: max(var(--page-x), calc((100vw - 1600px) / 2 + var(--page-x)));
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Декоративная сетка из точек (4px, шаг 20px) */
+@utility dots-pattern {
+  background-image: radial-gradient(circle at 2px 2px, #fff 2px, transparent 2.5px);
+  background-size: 20px 20px;
+}
+
+/* Синее свечение на фоне страниц (слой «bg» в Figma, прозрачность 40%) */
+@utility page-glow {
+  --glow:
+    rgb(44 62 127 / 0.4) 0%, rgb(44 62 127 / 0.34) 20%, rgb(44 62 127 / 0.25) 40%,
+    rgb(44 62 127 / 0.15) 60%, rgb(44 62 127 / 0.06) 80%, transparent 100%;
+
+  background-image: radial-gradient(circle 560px at -66px 558px, var(--glow));
+  background-repeat: no-repeat;
+
+  @media (width >= 48rem) {
+    background-image: radial-gradient(circle 1300px at 40px 760px, var(--glow));
+  }
 }
 
 @layer base {

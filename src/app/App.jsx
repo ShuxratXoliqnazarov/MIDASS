@@ -1,9 +1,14 @@
 import { RouterProvider } from 'react-router-dom'
 
+import CartProvider from '@/context/CartProvider'
+
 import { router } from './router'
 
-// Корень приложения. Сюда же позже добавляются глобальные провайдеры
-// (например, CartProvider для корзины).
+// Корень приложения: глобальные провайдеры + роутер
 export default function App() {
-  return <RouterProvider router={router} />
+  return (
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
+  )
 }

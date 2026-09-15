@@ -42,15 +42,32 @@ MIDAS/
     │   └── NotFoundPage/
     ├── components/             общие компоненты (используются на 2+ страницах)
     │   ├── layout/             Header, Footer, MobileMenu
-    │   ├── ui/                 Container, Button, Input, Select, Counter ...
+    │   ├── ui/                 Container, BasketButton, OutlineButton, SliderArrow, Breadcrumbs
+    │   ├── product/            ProductCard, ProductGrid, ProductPrice, WeightBadge
+    │   ├── icons/              SVG-иконки из Figma (Logo, CartIcon, ChevronIcon ...)
     │   └── common/             ScrollToTop, PagePlaceholder
+    ├── context/                CartProvider — корзина (localStorage)
     ├── constants/              routes, categories, navigation, contacts
-    ├── data/                   моковые данные (блюда, цены)
-    ├── hooks/                  кастомные хуки (useCart, useMediaQuery ...)
+    ├── data/                   dishes.js — блюда, цены, фото
+    ├── hooks/                  useCart, useScrolled
     ├── utils/                  cn(), formatPrice()
-    ├── assets/                 images/, icons/
+    ├── assets/                 images/ (фото из Figma), icons/
     └── styles/index.css        Tailwind + дизайн-токены из Figma
 ```
+
+## Готовые общие компоненты
+
+Перед тем как верстать своё — посмотри, может, это уже есть:
+
+| Компонент                    | Что делает                                                    |
+| ---------------------------- | ------------------------------------------------------------- |
+| `ProductCard`                | карточка блюда (фото, название, вес, цена, кнопка)            |
+| `ProductGrid`                | сетка карточек 2 → 3 → 4 → 6 колонок                          |
+| `BasketButton`               | жёлтая кнопка «в корзину»                                     |
+| `OutlineButton`              | кнопка с жёлтой рамкой («3 вида», «Показать еще»), `to` = ссылка |
+| `Breadcrumbs`                | «Главная / Корзина»                                           |
+| `SliderArrow`                | круглые стрелки слайдера                                      |
+| `useCart()`                  | `items`, `count`, `addItem`, `setQuantity`, `removeItem`, `clear` |
 
 ## Маршруты
 

@@ -1,12 +1,13 @@
 import { clsx } from 'clsx'
 import { extendTailwindMerge } from 'tailwind-merge'
 
-// tailwind-merge должен знать наши кастомные размеры текста из styles/index.css,
+// tailwind-merge должен знать наши кастомные токены из styles/index.css,
 // иначе он спутает text-caption (размер) с text-primary (цвет) и удалит один из них.
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      text: ['display', 'heading', 'subheading', 'price', 'body', 'caption', 'tiny'],
+      text: ['display', 'title', 'subheading', 'price', 'body', 'caption', 'tiny'],
+      shadow: ['button'],
     },
   },
 })

@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+/*
+ * Дизайн-токены из Figma (MIDAS).
+ * Используй их как обычные классы Tailwind:
+ *   bg-primary, text-accent, bg-dark, text-muted, font-montserrat, text-heading ...
+ * НЕ пиши хардкод-цвета (#fbd13e) в компонентах — добавь токен сюда.
+ */
+@theme {
+  /* ---------- Шрифт ---------- */
+  --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+
+  /* ---------- Цвета ---------- */
+  --color-primary: #fbd13e; /* жёлтый: кнопки, корзина, активные элементы */
+  --color-primary-hover: #dbb325;
+  --color-accent: #b70000; /* красный: акции, плашки */
+  --color-navy: #09234e; /* тёмно-синий: градиент фона, hover карточек меню */
+  --color-muted: #9ea2aa; /* серый текст, зачёркнутые цены */
+  --color-line: #c4c4c4; /* бордеры, разделители */
+  --color-dark: #0f0f11; /* основной фон сайта */
+  --color-dark-soft: #1c1b1b; /* фон блоков */
+
+  /* ---------- Размеры текста (из макета, px → rem) ---------- */
+  --text-display: 5rem; /* 80px — «Популярные блюда», «Меню» */
+  --text-heading: 3.125rem; /* 50px — заголовки страниц */
+  --text-subheading: 1.5625rem; /* 25px */
+  --text-price: 1.4375rem; /* 23px, weight 800 — цены */
+  --text-body: 1.25rem; /* 20px — названия блюд */
+  --text-caption: 0.8125rem; /* 13px — описания, навигация */
+  --text-tiny: 0.75rem; /* 12px */
+
+  /* ---------- Брейкпоинты (макеты: 360 / 768 / 1024 / 1600) ---------- */
+  /* sm: 640px, md: 768px, lg: 1024px, xl: 1280px — стандартные Tailwind */
+  --breakpoint-3xl: 100rem; /* 1600px — ширина desktop-макета */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark font-montserrat font-medium text-white antialiased;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}

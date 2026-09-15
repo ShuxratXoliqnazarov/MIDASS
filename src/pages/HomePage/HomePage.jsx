@@ -1,6 +1,14 @@
-import PagePlaceholder from '@/components/common/PagePlaceholder'
+import Hero from './components/Hero'
+import MenuSlider from './components/MenuSlider'
+import PopularDishes from './components/PopularDishes'
 
-// Секции страницы кладём в ./components (Hero, PopularDishes, MenuSlider ...)
+// Figma: Desktop_Главная, Tablet_Главная (1024 / 768), Главная (Phone)
 export default function HomePage() {
-  return <PagePlaceholder title="Главная" figmaFrame="Desktop_Главная" />
+  return (
+    <>
+      <Hero />
+      <PopularDishes />
+      <MenuSlider />
+    </>
+  )
 }

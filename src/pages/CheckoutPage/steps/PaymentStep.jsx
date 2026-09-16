@@ -4,6 +4,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom'
 import { ROUTES } from '@/constants/routes'
 import { useCart } from '@/hooks/useCart'
 
+import CardBrandIcons from '../components/CardBrandIcons'
 import CheckoutButton from '../components/CheckoutButton'
 import RadioOption from '../components/RadioOption'
 
@@ -55,6 +56,7 @@ export default function PaymentStep() {
             onChange={() => setMethod(option.id)}
           >
             <span className="text-body">{option.title}</span>
+            {option.id === 'card' && <CardBrandIcons />}
           </RadioOption>
         ))}
       </div>

@@ -41,10 +41,16 @@ export default function DeliveryStep() {
           checked={isCourier}
           onChange={() => setDelivery((prev) => ({ ...prev, method: 'courier' }))}
         >
-          <span className="text-body">Бесконтактная доставка {formatPrice(DELIVERY_PRICE)}</span>
+          <div className="flex w-full items-baseline justify-between gap-2">
+            <span className="text-body">Бесконтактная доставка</span>
+            <span className="text-body font-bold">{formatPrice(DELIVERY_PRICE)}</span>
+          </div>
           <p className="mt-2 text-caption text-muted">
-            Доставка по Москве и области, время передаётся при подтверждении заказа. Доставка от 30
-            минут
+            Доставка по Москве в пределах МКАД
+            <br />
+            Осуществляется ежедневно с 12:00 до 00:00,
+            <br />
+            Диапазон времени: от 1 до 1.5 часов
           </p>
         </RadioOption>
 
@@ -55,15 +61,22 @@ export default function DeliveryStep() {
           checked={!isCourier}
           onChange={() => setDelivery((prev) => ({ ...prev, method: 'pickup' }))}
         >
-          <span className="text-body">Самовывоз +0 ₽</span>
+          <div className="flex w-full items-baseline justify-between gap-2">
+            <span className="text-body">Самовывоз</span>
+            <span className="text-body font-bold">+0 ₽</span>
+          </div>
           <p className="mt-2 text-caption text-muted">
-            Самовывоз с 10:00 до 22:00 по адресу ул. Тверская, 5
+            Доступен с 12:00 до 00:00
+            <br />
+            По адресу: <span className="underline">ул. Улофа Пальме 5с2</span>
           </p>
         </RadioOption>
       </div>
 
       {isCourier && (
         <div className="flex w-full flex-col gap-5">
+          <p className="text-tiny tracking-[0.05em] text-muted uppercase">Адрес доставки</p>
+
           <FormField
             label="Улица"
             required

@@ -23,7 +23,7 @@ export default function ContactsStep() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-start gap-8">
-      <div>
+      <div className="max-w-[350px]">
         <p className="text-caption underline">Уже покупали у нас?</p>
         <p className="mt-1 text-caption text-muted">
           Войдите в личный кабинет, и все ваши данные автоматически заполнятся

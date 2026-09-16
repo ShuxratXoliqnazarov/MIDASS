@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
 import { ROUTES } from '@/constants/routes'
 import { cn } from '@/utils/cn'
@@ -9,8 +9,29 @@ const STEPS = [
   { title: '03. Оплата', to: ROUTES.CHECKOUT_PAYMENT },
 ]
 
-// «01. Контактные данные » 02. Способ доставки » 03. Оплата» — текущий шаг белый, остальные приглушены.
+// Зелёная галочка у уже пройденных шагов (Figma: Desktop_Оф.Заказа_Оплата)
+function DoneBadge() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true" className="size-4 shrink-0">
+      <circle cx="8" cy="8" r="8" fill="#22C55E" />
+      <path
+        d="M4.5 8.2L6.8 10.5L11.5 5.5"
+        stroke="#fff"
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+// «01. Контактные данные✓ » 02. Способ доставки✓ » 03. Оплата» — текущий шаг белый,
+// пройденные — с галочкой, остальные приглушены.
 export default function StepsNav({ className }) {
+  const { pathname } = useLocation()
+  const currentIndex = STEPS.findIndex((step) => step.to === pathname)
+
   return (
     <ol
       className={cn(
@@ -19,7 +40,7 @@ export default function StepsNav({ className }) {
       )}
     >
       {STEPS.map((step, index) => (
-        <li key={step.to} className="flex items-center gap-x-3">
+        <li key={step.to} className="flex items-center gap-x-2">
           <NavLink
             to={step.to}
             className={({ isActive }) =>
@@ -29,8 +50,10 @@ export default function StepsNav({ className }) {
             {step.title}
           </NavLink>
 
+          {currentIndex >= 0 && index < currentIndex && <DoneBadge />}
+
           {index < STEPS.length - 1 && (
-            <span className="text-muted" aria-hidden="true">
+            <span className="ml-1 text-muted" aria-hidden="true">
               »
             </span>
           )}

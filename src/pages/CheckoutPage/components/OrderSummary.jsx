@@ -18,7 +18,7 @@ export default function OrderSummary({ className }) {
 
   if (lines.length === 0) {
     return (
-      <div className={cn('flex flex-col items-start gap-4 bg-dark-soft p-5', className)}>
+      <div className={cn('flex min-w-0 flex-col items-start gap-4 bg-dark-soft p-5', className)}>
         <p className="text-body">Корзина пуста</p>
         <Link
           to={ROUTES.HOME}
@@ -33,14 +33,17 @@ export default function OrderSummary({ className }) {
   const total = lines.reduce((sum, { item, dish }) => sum + dish.price * item.quantity, 0)
 
   return (
-    <div className={cn('flex flex-col bg-dark-soft', className)}>
+    <div className={cn('flex min-w-0 flex-col bg-dark-soft', className)}>
       <ul>
         {lines.map(({ item, dish }) => (
-          <li key={dish.id} className="flex items-center gap-4 border-b border-line-dark p-5">
+          <li
+            key={dish.id}
+            className="flex items-center gap-3 border-b border-line-dark p-4 md:gap-4 md:p-5"
+          >
             <img
               src={dish.image}
               alt={dish.name}
-              className="size-[70px] shrink-0 rounded-full bg-line object-cover"
+              className="size-[56px] shrink-0 rounded-full bg-line object-cover md:size-[70px]"
             />
 
             <div className="min-w-0 flex-1">
@@ -54,7 +57,7 @@ export default function OrderSummary({ className }) {
         ))}
       </ul>
 
-      <div className="flex items-center justify-between p-5">
+      <div className="flex items-center justify-between p-4 md:p-5">
         <span className="text-caption tracking-[0.05em] text-muted uppercase">Итого к оплате:</span>
         <span className="text-price font-extrabold">{formatPrice(total)}</span>
       </div>

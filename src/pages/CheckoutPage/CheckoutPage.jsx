@@ -41,7 +41,9 @@ export default function CheckoutPage() {
       <StepsNav className="mt-10 md:mt-[50px]" />
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_573px] lg:items-start xl:grid-cols-[1fr_613px]">
-        <Outlet context={{ order, updateOrder }} />
+        <div className="min-w-0">
+          <Outlet context={{ order, updateOrder }} />
+        </div>
         <OrderSummary />
       </div>
     </Container>

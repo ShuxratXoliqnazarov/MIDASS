@@ -8,6 +8,7 @@ import { ROUTES } from '@/constants/routes'
 import { useScrolled } from '@/hooks/useScrolled'
 import { cn } from '@/utils/cn'
 
+import CheeseDrip from './CheeseDrip'
 import HeaderCart from './HeaderCart'
 import HeaderNav from './HeaderNav'
 import HeaderSearch from './HeaderSearch'
@@ -74,6 +75,7 @@ export default function Header() {
         </Container>
 
         <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
+        <CheeseDrip />
       </header>
     </>
   )

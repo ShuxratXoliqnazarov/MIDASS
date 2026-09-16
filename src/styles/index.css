@@ -107,6 +107,20 @@
   }
 }
 
+/* Капли «сырного соуса», бесконечно стекающие с нижнего края хедера */
+@keyframes cheese-drip {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

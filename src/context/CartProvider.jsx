@@ -31,11 +31,13 @@ export default function CartProvider({ children }) {
       items,
       count: items.reduce((sum, item) => sum + item.quantity, 0),
 
-      addItem: (id) =>
+      addItem: (id, quantity = 1) =>
         setItems((prev) =>
           prev.some((item) => item.id === id)
-            ? prev.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } : item))
-            : [...prev, { id, quantity: 1 }],
+            ? prev.map((item) =>
+                item.id === id ? { ...item, quantity: item.quantity + quantity } : item,
+              )
+            : [...prev, { id, quantity }],
         ),
 
       setQuantity: (id, quantity) =>

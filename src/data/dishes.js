@@ -58,6 +58,10 @@ export const DISHES = [
     price: 430,
     priceFrom: 410,
     variants: 2,
+    varieties: [
+      { id: 'lamb', name: 'С бараниной', weight: 80, price: 490 },
+      { id: 'beef', name: 'С говядиной', weight: 80, price: 430 },
+    ],
     image: dolma,
   },
   {
@@ -102,11 +106,19 @@ export const DISHES = [
   {
     id: 'khinkali-fried',
     category: 'khinkali',
-    name: 'Хинкали жаренные (6шт)',
+    name: 'Хинкали жаренные',
     weight: 350,
-    description: 'Пряные хинкали с начинкой из ароматной баранины со специями.',
-    price: 520,
-    oldPrice: 650,
+    description:
+      'Плотно-шелковые хинкали с сочной начинкой на выбор: из фермерской говядины, сыра моцарелла либо фермерской баранины и экологически чистой зелени',
+    price: 115,
+    priceFrom: 115,
+    variants: 3,
+    varieties: [
+      { id: 'cheese', name: 'С сыром', weight: 80, price: 125 },
+      { id: 'traditional', name: 'Традиционные', weight: 80, price: 115 },
+      { id: 'lamb-tarragon', name: 'Из баранины с тархуном', weight: 80, price: 125 },
+    ],
+    recommendedDishIds: ['khachapuri-adjarian', 'lunch-low-calorie', 'khachapuri-megrelian'],
     image: khinkaliFried1,
   },
   {
@@ -149,7 +161,29 @@ export const DISHES = [
   },
 ]
 
-export const getDishById = (id) => DISHES.find((dish) => dish.id === id)
+export const getDishById = (id) => {
+  if (!id) return undefined
+  if (id.includes('--')) {
+    const [baseId, varId] = id.split('--')
+    const baseDish = DISHES.find((dish) => dish.id === baseId)
+    if (baseDish) {
+      const variety = baseDish.varieties?.find((v) => v.id === varId)
+      if (variety) {
+        return {
+          ...baseDish,
+          id,
+          baseId,
+          name: baseDish.name,
+          varietyName: variety.name,
+          fullName: `${baseDish.name} (${variety.name})`,
+          price: variety.price,
+          weight: variety.weight,
+        }
+      }
+    }
+  }
+  return DISHES.find((dish) => dish.id === id)
+}
 
 // «Акции» — все блюда со скидкой, остальные категории — по полю category
 export const getDishesByCategory = (slug) =>

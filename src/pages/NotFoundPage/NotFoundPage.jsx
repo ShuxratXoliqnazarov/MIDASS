@@ -11,6 +11,7 @@ export default function NotFoundPage() {
       <Link
         to={ROUTES.HOME}
         className="mt-8 inline-block text-caption uppercase underline hover:text-primary"
+        
       >
         На главную
       </Link>
